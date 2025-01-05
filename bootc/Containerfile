@@ -1,4 +1,4 @@
 FROM registry.redhat.io/rhel9/rhel-bootc:latest
 
-RUN dnf install -y wget
+RUN dnf -y install wget && dnf clean all
 RUN dnf list --installed
