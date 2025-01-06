@@ -1,0 +1,55 @@
+---
+- name: Install and update packages on Fedora
+  hosts: localhost
+  vars:
+    vm_name: "my_vm"
+    vm_memory: 2048
+    vm_cpus: 2
+    vm_disk_path: "/path/to/vm_disk.qcow2"
+  tasks:
+  - name: Download ISO
+    get_url:
+      url: "https://example.com/path/to/your/iso"
+      dest: "/tmp/vm_image.iso"
+    register: iso_download
+  - name: Define a vm
+    community.libvirt.virt:
+      command: define
+      uri: 'qemu+unix:///session?socket=/Users/{{ ansible_env.USER }}/.cache/libvirt/libvirt-sock'
+    register: all_vms
+
+
+
+    - name: Define VM
+      community.libvirt.virt:
+        command: define
+        xml: |
+          <domain type='kvm'>
+            <name>my_vm</name>
+            <memory unit='MiB'>2048</memory>
+            <vcpu>2</vcpu>
+            <os>
+              <type arch='x86_64'>hvm</type>
+              <boot dev='cdrom'/>
+            </os>
+            <devices>
+              <disk type='file' device='cdrom'>
+                <source file='{{ iso_download.dest }}'/>
+                <target dev='hdc' bus='ide'/>
+                <readonly/>
+              </disk>
+              <disk type='file' device='disk'>
+                <source file='/path/to/vm_disk.qcow2'/>
+                <target dev='vda' bus='virtio'/>
+              </disk>
+              <interface type='network'>
+                <source network='default'/>
+              </interface>
+              <graphics type='vnc' port='-1' autoport='yes'/>
+            </devices>
+          </domain>
+
+    - name: Start VM
+      community.libvirt.virt:
+        name: my_vm
+        state: running
