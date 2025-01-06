@@ -1,0 +1,21 @@
+[[customizations.user]]
+name = "chbutler"
+password = ""
+key = ""
+groups = ["wheel"]
+
+[[customization.disk.partitions]]
+type = "lvm"
+name = "mainvg"
+
+[[customization.disk.partitions.logical_volumes]]
+name = "rootlv"
+mountpoint = "/"
+label = "root"
+fs_type = "ext4"
+minsize = "10 GiB"
+
+[[customization.disk.partitions.logical_volumes]]
+name = "swaplv"
+fs_type = "swap"
+minsize = "1 GiB"

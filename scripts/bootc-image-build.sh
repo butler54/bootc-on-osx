@@ -9,6 +9,5 @@ sudo podman run \
     -v /var/lib/containers/storage:/var/lib/containers/storage \
     registry.redhat.io/rhel9/bootc-image-builder:latest \
     --type qcow2 \
-    --local \
     --config /config.toml \
   quay.io/rh-ee-chbutler/bootc-on-ox:prod
