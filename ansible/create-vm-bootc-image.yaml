@@ -1,0 +1,23 @@
+---
+- name: Install and update packages on Fedora
+  hosts: localhost
+  vars:
+    vm_name: "my_vm"
+    vm_memory: 2048
+    vm_cpus: 2
+    vm_disk_path: "/path/to/vm_disk.qcow2"
+    vm_name: "testvm"
+    
+  tasks:
+
+  - name: Define a vm
+    community.libvirt.virt:
+      command: define
+      uri: 'qemu+unix:///session?socket=/Users/{{ ansible_env.USER }}/.cache/libvirt/libvirt-sock'
+      xml: "{{ lookup('template', 'vm-template-hvf.xml.j2') }}"
+
+  - name: Start VM
+    community.libvirt.virt:
+      name: "{{ vm_name }}"
+      state: running
+      uri: 'qemu+unix:///session?socket=/Users/{{ ansible_env.USER }}/.cache/libvirt/libvirt-sock'

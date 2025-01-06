@@ -1,0 +1,14 @@
+---
+- name: Install and update packages on Fedora
+  hosts: localhost
+  tasks:
+
+  - name: List all VMs
+    community.libvirt.virt:
+      command: list_vms
+      uri: 'qemu+unix:///session?socket=/Users/{{ ansible_env.USER }}/.cache/libvirt/libvirt-sock'
+    register: all_vms
+
+  - name: Display all VMs
+    debug:
+      var: all_vms.list_vms
