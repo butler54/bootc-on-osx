@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v0.1.1 (2025-01-06)
+
+### Chore
+
+* chore: add vm metadata (#5)
+
+Signed-off-by: Chris Butler &lt;chris.butler@redhat.com&gt;
+
+---------
+
+Signed-off-by: Chris Butler &lt;chris.butler@redhat.com&gt; ([`0885484`](https://github.com/butler54/bootc-on-osx/commit/08854847cb6157f882536026c5c1cb84106cccb8))
+
+### Fix
+
+* fix: add stuff (#6)
+
+Signed-off-by: Chris Butler &lt;chris.butler@redhat.com&gt; ([`9f97a26`](https://github.com/butler54/bootc-on-osx/commit/9f97a264126a1bb4e9c4a5ead6447d3f875dfd56))
+
 ## v0.1.0 (2025-01-04)
 
 ### Feature
